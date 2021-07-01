@@ -1,0 +1,10 @@
+{
+  "simulation": "reactiveexperiment.BasicSimulation",
+  "simulationId": "basicsimulation",
+  "start": 1625168742135,
+  "description": "",
+  "scenarios": ["Get report for customer"],
+  "assertions": [
+
+  ]
+}
