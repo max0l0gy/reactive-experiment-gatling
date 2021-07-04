@@ -14,15 +14,15 @@ class BasicSimulation extends Simulation {
     .acceptLanguageHeader("en-US,en;q=0.5")
     .userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0")
 
-  val scn = scenario("Get report for customer") // A scenario is a chain of requests and pauses
-    .exec(http("customer-id/101")
-      .get("/test/v1/reports/by/customer-id/101"))
-    .pause(7) // Note that Gatling has recorder real time pauses
+  val scnGetReport = scenario("Test Get report for customer") // A scenario is a chain of requests and pauses
+    .exec(http("customer-id/102")
+      .get("/test/v1/reports/by/customer-id/102"))
 
+  setUp(scnGetReport.inject(
+    nothingFor(4.seconds),
 
-  setUp(scn.inject(rampUsers(1358).during(1.second)).protocols(httpProtocol))
-  //  val scn2 = scenario("Get customers reports")
-  //    .exec(Reports.report)
-  //
-  //  setUp(scn2.inject(rampUsers(10000).during(60.seconds)).protocols(httpProtocol))
+    rampUsersPerSec(10).to(1400).during(30.minutes)
+
+  ).protocols(httpProtocol))
+
 }
